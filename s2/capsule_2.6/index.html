@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Capsule 2.6</title>
+</head>
+<body>
+    <select id="eyes"></select>
+    <select id="nose"></select>
+    <select id="mouth"></select>
+    <input id="color" type="color">
+
+    <br>
+
+    <img id="face">
+
+    <script>
+        const list = 'https://api.adorable.io/avatars/list';
+        const face = 'https://api.adorable.io/avatars/face/:eyes/:nose/:mouth/:color';
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = ()=> {
+            if(xhr.readyState === 4 && xhr.status === 200){
+                const variables = JSON.parse(xhr.response);
+
+                const eyes = document.getElementById('eyes')
+                const nose = document.getElementById('nose')
+                const mouth = document.getElementById('mouth')
+                const color = document.getElementById('color')
+
+                for (let key in variables.face) {
+                    variables.face[key].forEach(
+                        (elem)=>{
+                            let option = document.createElement('options');
+                            option.value = elem;
+                            option.innerText = elem;
+                            document.getElementById(key).appendChild(option);
+                        }
+                    );
+                }
+
+                function change() {
+                    const uri = face
+                        .replace(':eyes', eyes.value)
+                        .replace(':nose', nose.value)
+                        .replace(':mouth', mouth.value)
+                        .replace(':color', color.value.replace('#', ''));
+
+                    document.getElementById('img').setAttribute('src', uri);
+                }
+
+                eyes.onchange = change;
+                nose.onchange = change;
+                mouth.onchange = change;
+                color.onchange = change;
+
+                change();
+            }
+        };
+
+        xhr.open('GET', list, true);
+        xhr.send();
+
+    </script>
+</body>
+</html>

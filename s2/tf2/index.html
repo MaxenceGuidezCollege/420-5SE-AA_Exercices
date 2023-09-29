@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travail formatif 2</title>
+    <style>
+        img{
+            height: 300px;
+            width: 300px;
+            border: black 3px solid;
+            border-radius: 15px;
+            object-fit: cover;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <select id="qtn">
+        <option id="qtn1" Value="1" selected>1</option>
+        <option id="qtn2" Value="2">2</option>
+        <option id="qtn3" Value="4">4</option>
+        <option id="qtn4" Value="8">8</option>
+    </select>
+
+    <button id="previous">Previous</button>
+    <button id="next">Next</button>
+
+    <br>
+
+    <div>
+        <span id="page">?</span>
+        <span>/</span>
+        <span id="max_page">?</span>
+    </div>
+
+    <div id="images"></div>
+    <p>You have <span id="remaining"></span> requests remaining</p>
+
+    <script>
+        let qtn_page = 1
+        let apiUrl = `https://api.pexels.com/v1/search?query=september&per_page=` + qtn_page;
+        const apiKey = '563492ad6f917000010000019b453ce65b24471babde6e6bb0da5ce3';
+
+        const headers = {
+            Authorization: apiKey,
+        };
+
+        update();
+
+        function update() {
+
+            fetch(apiUrl, { headers })
+                .then(response => {
+                    const responseHeaders = response.headers;
+                    const headersObj = {};
+                    responseHeaders.forEach((value, name) => {
+                        headersObj[name] = value;
+                    });
+
+                    document.getElementById('remaining').innerText = headersObj["x-ratelimit-remaining"];
+
+                    return response.json();
+                })
+                .then(data => {
+                    btnQtn = document.getElementById('qtn');
+
+                    // Mettre à jour UI
+                    btnQtn.value = data.per_page;
+                    document.getElementById('page').innerText = data.page;
+                    document.getElementById('max_page').innerText = Math.ceil(data.total_results / btnQtn.value);
+
+                    // Listeners
+                    btnQtn.onchange = ()=>{
+                        apiUrl = `https://api.pexels.com/v1/search?query=september&per_page=` + btnQtn.value;
+                        update();
+                    }
+
+                    document.getElementById('next').onclick = () => {
+                        apiUrl = data.next_page;
+                        update();
+                    }
+
+                    document.getElementById('previous').onclick = () => {
+                        if(data.page > 1){
+                            apiUrl = data.prev_page;
+                            update();
+                        }
+                    }
+
+                    document.getElementById('images').innerHTML = '';
+                    for (let i = 0; i < data.photos.length; i++) {
+                        const url = data.photos[i].src.original;
+                        const img = document.createElement('img');
+                        img.src = url;
+                        document.getElementById('images').appendChild(img);
+                    }
+                })
+                .catch(error => {
+                    console.error('Une erreur s\'est produite:', error);
+                });
+        }
+    </script>
+</body>
+</html>

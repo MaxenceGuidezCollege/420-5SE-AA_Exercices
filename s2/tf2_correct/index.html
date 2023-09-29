@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travail formatif 2</title>
+</head>
+<body>
+
+<select id="per_page" onchange="update()">
+    <option>1</option>
+    <option>2</option>
+    <option>4</option>
+    <option>8</option>
+</select>
+
+<button onclick="update(previous);">Previous</button>
+<button onclick="update(next)">Next</button>
+
+<div id="page"></div>
+<div id="thumbnails"></div>
+
+<div>You have <span id="ratelimit"></span> requests remaining</div>
+
+<script>
+    const pexelsApi = 'api.pexels.com';
+    let next;
+    let previous;
+
+    function update(url) {
+        const per_page = document.getElementById('per_page').value;
+        const thumbnailsDiv = document.getElementById('thumbnails');
+        const currentPageDiv = document.getElementById('page');
+        const ratelimitSpan = document.getElementById('ratelimit');
+
+        const fetchPhotos = url ?? `https://${pexelsApi}/v1/search?query=:word&per_page=${per_page}`;
+
+        thumbnailsDiv.innerHTML = '';
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('GET', fetchPhotos
+            .replace(':word', 'september'), true);
+
+        //xhr.withCredentials = true;
+        xhr.setRequestHeader('Authorization', '563492ad6f917000010000019b453ce65b24471babde6e6bb0da5ce3');
+
+        function updateWithResponse(xhr) {
+            const response = xhr.response;
+            const list = JSON.parse(response);
+            const remaining = xhr.getResponseHeader('x-ratelimit-remaining');
+            ratelimitSpan.innerText = remaining;
+
+            next = list.next_page;
+            previous = list.prev_page;
+
+            currentPageDiv.innerText = `${list.page}/${Math.ceil(list.total_results/list.per_page)}`;
+            console.log(list);
+            list.photos.forEach(photo=>{
+                const img = document.createElement('img');
+                img.src = photo.src.tiny;
+                thumbnailsDiv.appendChild(img);
+            });
+        }
+
+        xhr.onreadystatechange = data => {
+            if (xhr.readyState === 4) {
+                switch (xhr.status) {
+                    case 200:
+                        updateWithResponse(xhr);
+                        break;
+                    default:
+
+                }
+            }
+        };
+
+        xhr.send();
+    }
+
+    update();
+</script>
+</body>
+</html>
