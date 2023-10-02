@@ -166,7 +166,7 @@ app.get('/users/:id', acceptsJson, (req, res) => {
         return;
     }
 
-    res.end(user);
+    res.json(user).end();
 });
 
 
