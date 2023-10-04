@@ -4,13 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ddc7bc8a-69be-4598-9183-c0906086a3fa" name="Changes" comment="">
+    <list default="true" id="ddc7bc8a-69be-4598-9183-c0906086a3fa" name="Changes" comment="Fix code issue&#10;When the user was selected it not appeared.">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/s6/ex_middleware/routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/s6/ex_middleware/users.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/s6/tf6/database.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/s6/tf6/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/s6/tf6/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/s6/tf6/lib.utils.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/s6/tf6/middlewares.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -37,21 +55,58 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/202130087/OneDrive - College D'Alma/Session 5/edd/420-5SE-AA_Exercices",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenDatabaseViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/202130087/OneDrive - College D'Alma/Session 5/COLab/Chevaux&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
+    ]
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\202130087\OneDrive - College D'Alma\Session 5\edd\420-5SE-AA_Exercices\s6\tf6" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\202130087\OneDrive - College D'Alma\Session 5\edd\420-5SE-AA_Exercices\s6\tf6" />
+      <recent name="C:\Users\202130087\OneDrive - College D'Alma\Session 5\edd\420-5SE-AA_Exercices\s6" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Node.js.routes.js">
+    <configuration name="index.js (tf6)" type="NodeJSConfigurationType" temporary="true" path-to-js-file="index.js" working-dir="$PROJECT_DIR$/s6/tf6">
+      <envs>
+        <env name="PGUSER" value="Maxence.Guidez" />
+        <env name="PGHOST" value="db-postgresql-tor1-81104-do-user-6727837-0.b.db.ondigitalocean.com" />
+        <env name="PGDATABASE" value="420-5SE-AA" />
+        <env name="PGPASSWORD" value="202130087" />
+        <env name="PGPORT" value="25060" />
+      </envs>
+      <method v="2" />
+    </configuration>
+    <configuration name="routes.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/s6/ex_middleware/routes.js" working-dir="$PROJECT_DIR$/s6/ex_middleware">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.routes.js" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -61,21 +116,36 @@
       <option name="presentableId" value="Default" />
       <updated>1696250127346</updated>
       <workItem from="1696250128358" duration="262000" />
-      <workItem from="1696250401775" duration="1719000" />
+      <workItem from="1696250401775" duration="9067000" />
+      <workItem from="1696332073216" duration="542000" />
+      <workItem from="1696422794374" duration="3522000" />
     </task>
+    <task id="LOCAL-00001" summary="Fix code issue&#10;When the user was selected it not appeared.">
+      <option name="closed" value="true" />
+      <created>1696252345907</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1696252345907</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Fix code issue&#10;When the user was selected it not appeared." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix code issue&#10;When the user was selected it not appeared." />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/s5/TF5 - Corrigé/index.js</url>
-          <line>168</line>
+          <url>file://$PROJECT_DIR$/s6/ex_middleware/users.js</url>
+          <line>41</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="3" />
+          <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
