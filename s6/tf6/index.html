@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Travail formatif 5</title>
+    <style>
+        div {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        tbody tr:hover {
+            background: lightgrey;
+            cursor: pointer;
+        }
+
+        label {
+            display: block;
+        }
+
+        #user,
+        table {
+            border: 1px solid black;
+            padding: 10px;
+        }
+
+        #user {
+            width: fit-content;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <form id="user" method="post" enctype="application/x-www-form-urlencoded" onsubmit="updateUser(this); return false;">
+        <img class="avatar" alt="L'avatar de l'utilisateur"/>
+        <div class="id"></div>
+        <label for="first_name">
+            Prénom
+            <input id="first_name" name="first_name" class="first_name"/>
+        </label>
+        <label for="last_name">
+            Nom
+            <input id="last_name" name="last_name" class="last_name"/>
+        </label>
+        <label for="email">
+            Courriel
+            <input id="email" name="email" class="email"/>
+        </label>
+        <label for="ip_address">
+            Addresse IP
+            <input id="ip_address" name="ip_address" class="ip_address"/>
+        </label>
+
+        <input type="hidden" name="avatar" class="avatar" />
+        <input type="hidden" name="active" class="active" />
+
+        <button type="submit">Modifier</button>
+    </form>
+
+    <div>
+        <button id="first" onclick="update(first_page)">&lt;&lt;</button>
+        <button id="previous" onclick="update(prev_page)">&lt;</button>
+        <button id="next" onclick="update(next_page)">&gt;</button>
+        <button id="last" onclick="update(last_page)">&gt;&gt;</button>
+        <div id="page"></div>
+    </div>
+
+    <div>
+        <select id="per-page" onchange="update()">
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+            <option>100</option>
+        </select>
+    </div>
+
+    <a id="download-pdf">Download Pdf</a>
+
+    <table id="user-list">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Prénom</th>
+            <th>Nom</th>
+            <th>Courriel</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <!-- Les users seront ajoutés ici -->
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    const userTable = document.querySelector("#user-list");
+    const tbody = userTable.querySelector('tbody');
+    const perPage = document.querySelector('#per-page');
+    const page = document.querySelector('#page');
+    const pdf = document.querySelector('#download-pdf');
+    const formulaire = document.querySelector('#user');
+
+    let next_page;
+    let prev_page;
+    let first_page;
+    let last_page;
+
+    async function updateUser(form) {
+
+        const response = await fetch(form.action, {
+            method: form.method,
+            body: new URLSearchParams(new FormData(form))
+        });
+
+        if(response.ok) {
+
+        } else {
+            console.log(response);
+        }
+
+        return false;
+    }
+
+    async function setUser(user) {
+        const response = await fetch(user.details);
+        formulaire.action = user.details;
+        console.log(formulaire.action);
+        if (response.ok) {
+            const details = await response.json();
+            for (let key in details) {
+                const elem = document.querySelector(`#user  input.${key}`);
+                if (elem) elem.value = details[key];
+            }
+            document.querySelector(`#user > img.avatar`).src = details.avatar;
+        }
+    }
+
+    function setUsers(users) {
+        const rows = users.map(user => {
+            const row = document.createElement('tr');
+            const id = document.createElement('td');
+            const first_name = document.createElement('td');
+            const last_name = document.createElement('td');
+            const email = document.createElement('td');
+
+            row.append(id, first_name, last_name, email);
+            row.onclick = () => setUser(user);
+
+            id.innerText = user.id;
+            first_name.innerText = user.first_name;
+            last_name.innerText = user.last_name;
+            email.innerText = user.email;
+
+            return row;
+        })
+
+        tbody.append(...rows);
+    }
+
+    async function fetchUsers(url) {
+        const response = await fetch(url);
+        if (response.ok) {
+            const contentType = response.headers.get("content-type");
+            if (contentType.includes('application/json')) {
+                const data = await response.json();
+                prev_page = data.prev_page;
+                next_page = data.next_page;
+                first_page = data.first_page;
+                last_page = data.last_page;
+                page.innerText = `${data.page} / ${data.page_count}`;
+                pdf.href = data.pdf_page;
+                setUsers(data.users);
+            } else {
+                console.error(`content-type not json : ${contentType}`);
+            }
+        }
+
+    }
+
+    function update(url) {
+        const host = 'localhost:3000';
+        tbody.innerHTML = null;
+        const _url = url ?? `http://${host}/users?per_page=${perPage.value}`;
+        fetchUsers(_url);
+    }
+
+    update();
+</script>
+</body>
+</html>
