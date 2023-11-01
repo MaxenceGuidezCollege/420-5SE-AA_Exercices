@@ -16,7 +16,7 @@ server.on('request', (request, response) => {
     let query = url.parse(request.url, true).query;
     let name = query.name === undefined ? 'toi' : query.name;
 
-    fs.readFile('index.html', 'utf-8', (err, data) => {
+    fs.readFile('login.html', 'utf-8', (err, data) => {
         if(err) {
             response.writeHead(404, {
                 'Content-type': 'text/html; charset=utf-8'

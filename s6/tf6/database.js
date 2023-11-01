@@ -20,7 +20,7 @@ module.exports.Database = class {
                     console.log("Error");
                 }
                 else{
-                    console.log(res.rows);
+                    return res.rows;
                 }
             });
         }finally {
@@ -36,7 +36,7 @@ module.exports.Database = class {
                     console.log("Error");
                 }
                 else{
-                    console.log(res.rows);
+                    return res.rows;
                 }
             });
 
@@ -49,6 +49,17 @@ module.exports.Database = class {
         const client = await this._pool.connect();
         try{
             const res = await client.query('SELECT * FROM TEST WHERE last_name ILIKE $1', [lastName]);
+            return res.rows;
+
+        }finally {
+            client.release();
+        }
+    }
+
+    async queryById(id)  {
+        const client = await this._pool.connect();
+        try{
+            const res = await client.query('SELECT * FROM maxence_guidez.users WHERE id = $1::int', [id]);
             return res.rows;
 
         }finally {
